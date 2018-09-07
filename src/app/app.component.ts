@@ -10,18 +10,29 @@ export class AppComponent {
     'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'Z'];
   palabra = 'AGUACATE';
   palabraOculta = ' ';
+  intentos = 0;
 
   constructor() {
     this.palabraOculta = '_ '.repeat(this.palabra.length);
   }
   comprobar(letra) {
+    this.existeLetra(letra);
     console.log('letra', letra);
     const palabraOcultaArr = this.palabraOculta.split(' ');
     for (let i = 0; i < this.palabra.length; i++) {
-      if (this.palabra[i] === letra)  {
+      if (this.palabra[i] === letra) {
         palabraOcultaArr[i] = letra;
       }
     }
     this.palabraOculta = palabraOcultaArr.join(' ');
+  }
+  /* indexof retorna la posicion de la letra que encuentre */
+  existeLetra(letra) {
+    if (this.palabra.indexOf(letra) >= 0) {
+      console.log('existe letra', letra);
+    } else {
+      console.log('letra no existe', letra);
+      this.intentos ++;
+    }
   }
 }
