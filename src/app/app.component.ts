@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-//Decorador, agrega funcionalidades a la clase de forma externa
+// Decorador, agrega funcionalidades a la clase de forma externa
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,6 +11,8 @@ export class AppComponent {
   palabra = 'AGUACATE';
   palabraOculta = ' ';
   intentos = 0;
+  gano = false;
+  perdio = false;
 
   constructor() {
     this.palabraOculta = '_ '.repeat(this.palabra.length);
@@ -25,6 +27,25 @@ export class AppComponent {
       }
     }
     this.palabraOculta = palabraOcultaArr.join(' ');
+    this.verificaGane();
+  }
+  verificaGane() {
+    const palabraArr = this.palabraOculta.split(' ');
+    const palabraEvaluar = palabraArr.join('');
+
+    if (palabraEvaluar === this.palabra) {
+      this.gano = true;
+      console.log('Usuario GANADOR');
+
+    }
+
+    if (this.intentos >= 9) {
+      this.perdio = true;
+      console.log('Usuario PERDEDOR');
+    }
+
+
+
   }
   /* indexof retorna la posicion de la letra que encuentre */
   existeLetra(letra) {
@@ -32,7 +53,7 @@ export class AppComponent {
       console.log('existe letra', letra);
     } else {
       console.log('letra no existe', letra);
-      this.intentos ++;
+      this.intentos++;
     }
   }
 }
